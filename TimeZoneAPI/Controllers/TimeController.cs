@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TimeZoneConverter;
 
 [ApiController]
@@ -17,9 +18,10 @@ public class TimeController : ControllerBase
         foreach (var timeZone in timeZones)
         {
             var localTime = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, timeZone);
-            if (localTime.Hour == 17 && localTime.Minute == 0)
+            if (localTime.Hour == 17)
             {
-                results.Add(timeZone.DisplayName);
+                string timeThere = timeZone.DisplayName.Split(')')[1] + " --> " + localTime.Hour + ":" + localTime.Minute;
+                results.Add(timeThere);
                 Console.WriteLine(results.Last());
 
             }
