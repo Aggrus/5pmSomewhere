@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TimeZoneConverter;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/time")]
 public class TimeController : ControllerBase
 {
     [HttpGet("where-is-5pm")]
@@ -20,9 +20,11 @@ public class TimeController : ControllerBase
             if (localTime.Hour == 17 && localTime.Minute == 0)
             {
                 results.Add(timeZone.DisplayName);
+                Console.WriteLine(results.Last());
+
             }
         }
-
+       
         return Ok(new { locations = results });
     }
 }
